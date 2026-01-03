@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react'
-import { FloatingSprite, Nav, Hero, About, Projects, Contact, Footer, Stars } from './components'
+import {
+  FloatingSprite, Nav, Hero, About, Projects, Contact, Footer, Stars,
+  LoadingScreen, MusicPlayer, ThemeToggle, Experience, Skills,
+  Testimonials, MiniGame, Achievements, VisitorCounter, GameButton
+} from './components'
+import { GameProvider, useGame } from './context/GameContext'
 import './App.css'
 
-function App() {
+function AppContent() {
   const [activeSection, setActiveSection] = useState('home')
+  const [isLoading, setIsLoading] = useState(true)
+  const { partyMode, darkMode, playSound, unlockAchievement } = useGame()
 
   const sprites = [
     { src: '/sprites/yoshi.png', size: 72 },
@@ -17,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'contact']
+      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'testimonials', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -32,14 +39,42 @@ function App() {
           }
         }
       }
+
+      // Check if user visited all sections
+      const allVisited = sections.every(s => {
+        const el = document.getElementById(s)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          return rect.top < window.innerHeight
+        }
+        return false
+      })
+      if (allVisited) {
+        unlockAchievement('explorer', 'Explorer', 'Visited all sections!')
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [unlockAchievement])
+
+  // Add click sound to all buttons
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+        playSound('playClick')
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [playSound])
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />
+  }
 
   return (
-    <div className="app">
+    <div className={`app ${partyMode ? 'party-mode' : ''} ${darkMode ? 'dark-mode' : ''}`}>
       <Stars />
       <div className="floating-sprites hidden sm:block">
         {sprites.map((sprite, i) => (
@@ -47,15 +82,36 @@ function App() {
         ))}
       </div>
 
+      {/* Fixed UI Elements */}
+      <MusicPlayer />
+      <ThemeToggle />
+      <Achievements />
+      <GameButton />
+      <VisitorCounter />
+
+      {/* Mini Game Modal */}
+      <MiniGame />
+
       <Nav activeSection={activeSection} />
       <main>
         <Hero />
         <About />
+        <Skills />
+        <Experience />
         <Projects />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <GameProvider>
+      <AppContent />
+    </GameProvider>
   )
 }
 

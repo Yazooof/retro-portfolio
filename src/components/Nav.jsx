@@ -4,7 +4,10 @@ const Nav = ({ activeSection }) => {
   const navItems = [
     { id: 'home', icon: '🏠' },
     { id: 'about', icon: '👤' },
+    { id: 'skills', icon: '⚔️' },
+    { id: 'experience', icon: '🗺️' },
     { id: 'projects', icon: '🎮' },
+    { id: 'testimonials', icon: '💬' },
     { id: 'contact', icon: '📧' }
   ]
 
