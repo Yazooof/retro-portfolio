@@ -25,6 +25,47 @@ const Projects = () => {
     }
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  }
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 60,
+      rotateX: -15
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  }
+
+  const tagVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
+        type: 'spring',
+        stiffness: 200
+      }
+    })
+  }
+
   return (
     <section id="projects" className="projects">
       <motion.div
@@ -32,38 +73,110 @@ const Projects = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="section-title">My Projects</h2>
-        <p className="section-subtitle">Here's what I've been working on</p>
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 100 }}
+        >
+          My Projects
+        </motion.h2>
+        <motion.p
+          className="section-subtitle"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.span
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            ⭐
+          </motion.span>{' '}
+          Here's what I've been working on{' '}
+          <motion.span
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+          >
+            ⭐
+          </motion.span>
+        </motion.p>
 
-        <div className="projects-grid">
+        <motion.div
+          className="projects-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
               className="project-card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
+              variants={cardVariants}
+              whileHover={{
+                y: -15,
+                scale: 1.02,
+                transition: { type: 'spring', stiffness: 300 }
+              }}
             >
-              <div className="project-emoji">{project.emoji}</div>
-              <h3>{project.title}</h3>
+              <motion.div
+                className="project-emoji"
+                whileHover={{
+                  scale: 1.3,
+                  rotate: [0, -10, 10, -10, 0],
+                  transition: { duration: 0.5 }
+                }}
+              >
+                {project.emoji}
+              </motion.div>
+              <motion.h3
+                whileHover={{ color: '#fff', x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                {project.title}
+              </motion.h3>
               <p>{project.description}</p>
               <div className="project-tags">
-                {project.tags.map(tag => (
-                  <span key={tag} className="project-tag">{tag}</span>
+                {project.tags.map((tag, tagIndex) => (
+                  <motion.span
+                    key={tag}
+                    className="project-tag"
+                    custom={tagIndex}
+                    variants={tagVariants}
+                    whileHover={{
+                      scale: 1.15,
+                      backgroundColor: 'rgba(0, 166, 81, 0.4)',
+                      boxShadow: '0 0 15px rgba(0, 166, 81, 0.5)'
+                    }}
+                  >
+                    {tag}
+                  </motion.span>
                 ))}
               </div>
               <motion.a
                 href={project.link}
                 className="project-link"
-                whileHover={{ x: 5 }}
+                whileHover={{
+                  x: 10,
+                  color: '#fff',
+                  backgroundColor: 'var(--snes-red)',
+                  boxShadow: '0 0 20px rgba(230, 0, 18, 0.5)'
+                }}
+                whileTap={{ scale: 0.95 }}
               >
-                View Project →
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  View Project →
+                </motion.span>
               </motion.a>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   )

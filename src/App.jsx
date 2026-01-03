@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FloatingSprite, Nav, Hero, About, Projects, Contact, Footer } from './components'
+import { FloatingSprite, Nav, Hero, About, Projects, Contact, Footer, Stars } from './components'
 import './App.css'
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
 
   return (
     <div className="app">
+      <Stars />
       <div className="floating-sprites hidden sm:block">
         {sprites.map((sprite, i) => (
           <FloatingSprite key={i} src={sprite.src} size={sprite.size} delay={i * 2.5} />

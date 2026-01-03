@@ -850,6 +850,467 @@ section {
   51%, 100% { opacity: 0; }
 }
 
+/* ===== COOL ANIMATIONS ===== */
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    text-shadow:
+      3px 3px 0 var(--snes-purple),
+      6px 6px 0 var(--snes-red),
+      9px 9px 0 #000;
+  }
+  20% {
+    transform: translate(-2px, 2px);
+    text-shadow:
+      3px 3px 0 var(--snes-red),
+      6px 6px 0 var(--snes-blue),
+      9px 9px 0 #000;
+  }
+  40% {
+    transform: translate(-2px, -2px);
+    text-shadow:
+      5px 3px 0 var(--snes-green),
+      6px 6px 0 var(--snes-purple),
+      9px 9px 0 #000;
+  }
+  60% {
+    transform: translate(2px, 2px);
+    text-shadow:
+      3px 5px 0 var(--snes-blue),
+      6px 6px 0 var(--snes-yellow),
+      9px 9px 0 #000;
+  }
+  80% {
+    transform: translate(2px, -2px);
+    text-shadow:
+      3px 3px 0 var(--snes-purple),
+      8px 6px 0 var(--snes-red),
+      9px 9px 0 #000;
+  }
+  100% {
+    transform: translate(0);
+    text-shadow:
+      3px 3px 0 var(--snes-purple),
+      6px 6px 0 var(--snes-red),
+      9px 9px 0 #000;
+  }
+}
+
+.glitch-text {
+  animation: glitch 3s infinite;
+}
+
+.glitch-text:hover {
+  animation: glitch 0.3s infinite;
+}
+
+/* Pulsing Glow Effect */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 6px 0 #5c0000,
+      0 8px 10px rgba(0,0,0,0.4),
+      0 0 20px rgba(230, 0, 18, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 6px 0 #5c0000,
+      0 8px 10px rgba(0,0,0,0.4),
+      0 0 40px rgba(230, 0, 18, 0.6),
+      0 0 60px rgba(230, 0, 18, 0.3);
+  }
+}
+
+.btn-primary {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Rainbow Border Animation */
+@keyframes rainbow-border {
+  0% { border-color: var(--snes-red); }
+  25% { border-color: var(--snes-yellow); }
+  50% { border-color: var(--snes-green); }
+  75% { border-color: var(--snes-blue); }
+  100% { border-color: var(--snes-red); }
+}
+
+.rainbow-border {
+  animation: rainbow-border 4s linear infinite;
+}
+
+/* Sparkle Effect */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake-on-hover:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Power On Effect */
+@keyframes power-on {
+  0% {
+    filter: brightness(0) saturate(0);
+    transform: scaleY(0.01);
+  }
+  30% {
+    filter: brightness(2) saturate(0);
+    transform: scaleY(1);
+  }
+  50% {
+    filter: brightness(1.5) saturate(0.5);
+  }
+  100% {
+    filter: brightness(1) saturate(1);
+    transform: scaleY(1);
+  }
+}
+
+.power-on {
+  animation: power-on 1.5s ease-out forwards;
+}
+
+/* Pixel Fade In */
+@keyframes pixel-fade-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.8);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.pixel-fade-in {
+  animation: pixel-fade-in 0.8s ease-out forwards;
+}
+
+/* Rotating Glow */
+@keyframes rotating-glow {
+  0% {
+    box-shadow:
+      4px 4px 0px #000,
+      0 0 20px rgba(230, 0, 18, 0.5);
+  }
+  25% {
+    box-shadow:
+      4px 4px 0px #000,
+      0 0 20px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow:
+      4px 4px 0px #000,
+      0 0 20px rgba(0, 166, 81, 0.5);
+  }
+  75% {
+    box-shadow:
+      4px 4px 0px #000,
+      0 0 20px rgba(0, 88, 168, 0.5);
+  }
+  100% {
+    box-shadow:
+      4px 4px 0px #000,
+      0 0 20px rgba(230, 0, 18, 0.5);
+  }
+}
+
+.project-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+  border-color: var(--snes-yellow);
+  animation: rotating-glow 2s linear infinite;
+}
+
+/* Bounce In Animation */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+/* Typing Cursor */
+@keyframes cursor-blink {
+  0%, 50% { border-color: var(--snes-yellow); }
+  51%, 100% { border-color: transparent; }
+}
+
+.typing-cursor::after {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--snes-yellow);
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Scan Line Flicker */
+@keyframes scan-flicker {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+}
+
+.app::before {
+  animation: scan-flicker 0.1s infinite;
+}
+
+/* Star Twinkle */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Levitate */
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+.levitate {
+  animation: levitate 4s ease-in-out infinite;
+}
+
+/* Neon Flicker */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 4px var(--snes-yellow),
+      0 0 11px var(--snes-yellow),
+      0 0 19px var(--snes-yellow),
+      0 0 40px var(--snes-yellow);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.neon-text {
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+/* Controller Button Press */
+@keyframes button-press {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      0 6px 0 #5c0000,
+      0 8px 10px rgba(0,0,0,0.4);
+  }
+  50% {
+    transform: translateY(4px);
+    box-shadow:
+      0 2px 0 #5c0000,
+      0 3px 5px rgba(0,0,0,0.4);
+  }
+}
+
+/* Coin Spin */
+@keyframes coin-spin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.coin-spin:hover {
+  animation: coin-spin 0.6s ease-in-out;
+}
+
+/* Wave Animation for emoji */
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  75% { transform: rotate(-20deg); }
+}
+
+.project-emoji {
+  display: inline-block;
+  animation: wave 2s ease-in-out infinite;
+}
+
+.project-card:hover .project-emoji {
+  animation: wave 0.5s ease-in-out infinite;
+}
+
+/* Section Title Shine */
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.section-title {
+  background: linear-gradient(
+    90deg,
+    var(--snes-yellow) 0%,
+    #fff 25%,
+    var(--snes-yellow) 50%,
+    #fff 75%,
+    var(--snes-yellow) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+  text-shadow: none;
+}
+
+/* Active Nav Link Pulse */
+.nav-links a.active {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Avatar Pulse Ring */
+@keyframes pulse-ring {
+  0% {
+    box-shadow:
+      var(--pixel-shadow),
+      inset 0 0 30px rgba(0,0,0,0.3),
+      0 0 0 0 rgba(255, 215, 0, 0.7);
+  }
+  70% {
+    box-shadow:
+      var(--pixel-shadow),
+      inset 0 0 30px rgba(0,0,0,0.3),
+      0 0 0 20px rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow:
+      var(--pixel-shadow),
+      inset 0 0 30px rgba(0,0,0,0.3),
+      0 0 0 0 rgba(255, 215, 0, 0);
+  }
+}
+
+.avatar-placeholder {
+  animation: pulse-ring 2s infinite;
+}
+
+/* Input Focus Glow */
+.form-group input:focus,
+.form-group textarea:focus {
+  animation: rainbow-border 2s linear infinite;
+}
+
+/* Success Message Pop */
+@keyframes success-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Scroll Arrow Bounce */
+.scroll-arrow {
+  animation: float 1s ease-in-out infinite;
+}
+
+/* Stars Background */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--snes-yellow);
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Hero Name Rainbow on Hover */
+.hero-name:hover {
+  animation: glitch 0.3s infinite, rainbow 2s linear infinite;
+}
+
+/* Skill Tag Pop */
+.skill-tag {
+  transition: all 0.1s ease;
+}
+
+.skill-tag:hover {
+  transform: translateY(-5px) scale(1.1);
+  animation: bounce-in 0.3s ease-out;
+}
+
+/* Social Link Bounce */
+.social-links a:hover {
+  animation: bounce-in 0.4s ease-out;
+}
+
 /* ===== Selection Color ===== */
 ::selection {
   background: var(--snes-red);
